@@ -19,10 +19,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
-        avro-python3-version: [1.9.1, 1.9.2.1]
+        python-version: [3.5, 3.8]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: actions/checkout@v2
+    - name: Env
+      run: env
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
@@ -31,5 +33,5 @@ jobs:
     - name: Update pip
       run: python -m pip install --upgrade pip
 
-    - name: Install avro-python3 version ${{ matrix.avro-python3-version }}
-      run: pip --verbose install avro-python3==${{matrix.avro-python3-version }}
+    - name: Install package
+      run: pip --verbose install .
